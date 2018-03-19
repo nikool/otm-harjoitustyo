@@ -1,0 +1,95 @@
+commit 7d23466609469bb11c3c9a929ef5a32c4627413c
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 17:07:42 2018 +0200
+
+    file1 poistettu, file2 -> file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 5144e8c1b24ab4b78df32e5b3b86204013a0d0ac
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 17:03:44 2018 +0200
+
+    tiedostoja/ lisätty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 2556a06685791daa4205c93894cedc3056b83580
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:59:50 2018 +0200
+
+    tehty muutoksia ekaan ja kolmanteen
+
+ eka.txt    | 4 +++-
+ kolmas.txt | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+commit de1fddfa999e6d015e3a3e2ba46a48966529c2c9
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:58:00 2018 +0200
+
+    tiedosto -> eka
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit ca59e9b1369f92793225d45b8a0694cccab02b5c
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:57:04 2018 +0200
+
+    toinen poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 5b2739575940aaeed7f03dd4d3881a27e4f6a310
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:55:11 2018 +0200
+
+    stuff lisätty
+
+ stuff/testi.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e595b7add1257a0f517b4f23030d781b3b5c147f
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:53:58 2018 +0200
+
+    muokattu toista ja kolmatta
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 123b842100ddd2a58febfd9a345e4e2ff76917d1
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:52:46 2018 +0200
+
+    kolmas lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit ca800b519e0fb19ad0ae63035fc4a408efcbd044
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:51:34 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 37089b036b976e7e5c9f279d6e0cf5e8887c2a48
+Author: Niko Olsson <niko.olsson@gmail.com>
+Date:   Mon Mar 19 16:49:51 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
