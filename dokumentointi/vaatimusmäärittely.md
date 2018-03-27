@@ -14,13 +14,13 @@ Sovelluksella on vain yksi käyttäjä, eli normaali käyttäjä.
 
 ## Toiminnallisuus
 
-..* Tulojen ja menojen syöttäminen
+* Tulojen ja menojen syöttäminen
 
-..* Syötettyjen tapahtumien tarkastelu-, muokkaus- ja 
+* Syötettyjen tapahtumien tarkastelu-, muokkaus- ja 
 poistomahdollisuus.
 
-..* Kuukausittaisten tilastojen tarkastelu.
+* Kuukausittaisten tilastojen tarkastelu.
 
-...Tulojen ja menojen keskiarvot.
+* Tulojen ja menojen keskiarvot.
 
-...Onko talous plussalla vai miinuksella
+* Onko talous plussalla vai miinuksella
