@@ -13,7 +13,7 @@ Pushaamaton muutos.
 
 # Harjoitustyö
 
-Harjoitustyön dokumentoinit:
+Harjoitustyön dokumentoinnit:
 
 [vaatimusmäärittely.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmäärittely.md)
 
