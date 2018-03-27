@@ -35,6 +35,7 @@ public class Kassapaate {
         if (kortti.saldo() >= 240) {
             kortti.otaRahaa(240);
             this.edulliset++;
+            this.kassassaRahaa = kassassaRahaa + 240;
             return true;
         } else {
             return false;
@@ -45,6 +46,7 @@ public class Kassapaate {
         if (kortti.saldo() >= 400) {
             kortti.otaRahaa(400);
             this.maukkaat++;
+            this.kassassaRahaa = kassassaRahaa + 400;
             return true;
         } else {
             return false;
