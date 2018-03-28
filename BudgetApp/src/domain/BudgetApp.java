@@ -1,10 +1,12 @@
 
-package main;
+package domain;
+
+import ui.TextUi;
 
 public class BudgetApp {
     
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        TextUi ui = new TextUi();
     }
     
 }
