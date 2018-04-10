@@ -11,6 +11,9 @@
 # Testaus
 
 Testit suoritetaan komennolla
+
 ````mvn test````
+
 Testikattavuusraportti luodaan komennolla
+
 ````mvn jacoco:report````
