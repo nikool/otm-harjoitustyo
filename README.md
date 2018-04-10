@@ -1,20 +1,29 @@
-# OTM Laskarit
+### BudgetApp 
 
-## Viikon 1 harjoitukset
-
-Tämä on **viikon 1** harjoitus *Ohjelmistotekniikan menetelmät* 
-kurssilla.
-
-[komentorivi.txt](https://github.com/nikool/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-
-[gitlog.txt](https://github.com/nikool/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-
-Pushaamaton muutos.
-
-# Harjoitustyö
-
-Harjoitustyön dokumentoinnit:
+## Dokumentaatio:
 
 [vaatimusmäärittely.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmäärittely.md)
 
 [työaikakirjanpito.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/työaikakirjanpito.md)
+
+## Komentorivitoiminnot
+
+# Testaus
+
+Testit suoritetaan komennolla
+
+````mvn test````
+
+Testikattavuusraportti luodaan komennolla
+
+````mvn jacoco:report````
+
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto target/site/jacoco/index.html
+
+# Suoritettavan jarin generointi
+
+Komento
+
+````mvn package````
+
+generoi hakemistoon target suoritettavan jar-tiedoston BudgetApp-1.0-SNAPSHOT.jar
