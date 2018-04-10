@@ -17,3 +17,13 @@ Testit suoritetaan komennolla
 Testikattavuusraportti luodaan komennolla
 
 ````mvn jacoco:report````
+
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto target/site/jacoco/index.html
+
+# Suoritettavan jarin generointi
+
+Komento
+
+````mvn package````
+
+generoi hakemistoon target suoritettavan jar-tiedoston BudgetApp-1.0-SNAPSHOT.jar
