@@ -1,7 +1,7 @@
 
-package domain;
+package com.nikool.budgetapp.domain;
 
-import ui.TextUi;
+import com.nikool.budgetapp.ui.TextUi;
 
 public class BudgetApp {
     
