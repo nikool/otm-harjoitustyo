@@ -6,6 +6,8 @@
 
 [työaikakirjanpito.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/työaikakirjanpito.md)
 
+[arkkitehtuurikuvaus.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/arkkitehtuurikuvaus.md)
+
 ## Komentorivitoiminnot
 
 # Testaus
