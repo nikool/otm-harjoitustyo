@@ -1,5 +1,5 @@
 
-package com.nikool.budgetapp.dao;
+package budgetapp.dao;
 
 import java.sql.*;
 import java.util.*;

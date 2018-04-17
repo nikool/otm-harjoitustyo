@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-import com.nikool.budgetapp.domain.Transaction;
+import budgetapp.domain.Transaction;
+import java.time.Month;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,13 +8,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author nikoo
- */
 public class TransactionTest {
     
-    Transaction transaction;
+    Transaction transactionCurrentMonth;
+    Transaction transactionSpecificMonth;
     
     public TransactionTest() {
     }
@@ -33,7 +26,8 @@ public class TransactionTest {
     
     @Before
     public void setUp() {
-        transaction = new Transaction(10.0);
+        transactionCurrentMonth = new Transaction(10.0);
+        transactionSpecificMonth = new Transaction(10.0, 1);
     }
     
     @After
@@ -46,6 +40,13 @@ public class TransactionTest {
     @Test
     public void constructorAddsCorrectAmount() {
         
-        assertEquals("Transaction amount: 10.0", transaction.toString());
+        assertEquals("Transaction amount: 10.0", transactionCurrentMonth.toString());
+    }
+    
+    @Test
+    public void constructorAddsCorrectMonth() {
+        
+        assertEquals("Transaction amount: 10.0", transactionSpecificMonth.toString());
+        assertEquals(Month.JANUARY, transactionSpecificMonth.getMonth());
     }
 }

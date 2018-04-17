@@ -1,19 +1,25 @@
 
-package com.nikool.budgetapp.dao;
+package budgetapp.dao;
 
-import com.nikool.budgetapp.domain.Transaction;
+import budgetapp.domain.Transaction;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class initialDao implements Dao<Transaction, Integer>{
+public class InitialDao implements Dao<Transaction, Integer> {
     
     private List<Transaction> testDatabase = new ArrayList<>();
     
 
-    @Override
-    public Transaction findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public List<Transaction> findAllOfMonth(Integer month) {
+        List<Transaction> transactionsOfMonth = new ArrayList<>();
+        for (int i = 0; i < testDatabase.size(); i++) {
+            if (testDatabase.get(i).getMonth().ordinal() + 1 == month) {
+                transactionsOfMonth.add(testDatabase.get(i));
+            }
+        }
+        return transactionsOfMonth;
     }
 
     @Override
@@ -33,6 +39,11 @@ public class initialDao implements Dao<Transaction, Integer>{
 
     @Override
     public void delete(Integer key) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Transaction findOne(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
