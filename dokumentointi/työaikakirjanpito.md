@@ -8,5 +8,7 @@
 | 10.4. | 1 | ensimmäisen testin toteuttaminen |
 | 17.4. | 1 | checstyleen tutustuminen |
 | 17.4. | 3 | toiminnallisuuden laajentaminen ja toimintojen eriyttäminen |
+| 24.4. | 4 | lisätty toiminnallisuutta ja logiikkaa |
+| 24.4. | 1 | lisätty testejä |
 | | | |
-| | 9 | yhteensä|
+| | 14 | yhteensä|
