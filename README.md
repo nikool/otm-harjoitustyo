@@ -1,5 +1,7 @@
 # BudgetApp 
 
+BudgetApp on sovellus, jolla käyttäjä voi seurata omia kuukausittaisia tuloja ja menojaan. Sovellus tarjoaa käyttäjälle hyödyllistä tietoa kuukausibalansseistaan.
+
 ## Dokumentaatio:
 
 [vaatimusmäärittely.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmäärittely.md)
