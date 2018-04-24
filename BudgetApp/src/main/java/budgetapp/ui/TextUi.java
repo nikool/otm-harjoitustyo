@@ -136,12 +136,17 @@ public class TextUi {
                 }
             }
             if (month == 0) {
-                if (!budgetService.addTransaction(amount)) {
-                    System.out.println("Please input a transaction value other than zero.");
+                if (recurringAdded == false) {
+                    if (!budgetService.addTransaction(amount)) {
+                        System.out.println("Please input a transaction value other than zero.");
+                    } else {
+                        System.out.println("New transaction added!");
+                        break;
+                    }
                 } else {
-                    System.out.println("New transaction added!");               
+                    recurringAdded = false;
                     break;
-                }
+                }    
             } else {
                 if (recurringAdded == false) {
                     if (!budgetService.addTransactionToMonth(amount, month)) {
@@ -151,6 +156,7 @@ public class TextUi {
                         break;
                     }  
                 } else {
+                    recurringAdded = false;
                     break;
                 }     
             }    
