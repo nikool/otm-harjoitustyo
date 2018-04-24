@@ -8,6 +8,10 @@
 
 [arkkitehtuurikuvaus.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/arkkitehtuurikuvaus.md)
 
+## Releaset
+
+[Viikko 5](https://github.com/nikool/otm-harjoitustyo/releases/tag/week5)
+
 ## Komentorivitoiminnot
 
 # Testaus
