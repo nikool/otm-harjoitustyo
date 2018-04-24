@@ -1,4 +1,4 @@
-### BudgetApp 
+# BudgetApp 
 
 ## Dokumentaatio:
 
@@ -12,9 +12,9 @@
 
 [Viikko 5](https://github.com/nikool/otm-harjoitustyo/releases/tag/week5)
 
-## Komentorivitoiminnot
+# Komentorivitoiminnot
 
-# Testaus
+## Testaus
 
 Testit suoritetaan komennolla
 
@@ -26,7 +26,7 @@ Testikattavuusraportti luodaan komennolla
 
 Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto target/site/jacoco/index.html
 
-# Suoritettavan jarin generointi
+## Suoritettavan jarin generointi
 
 Komento
 
