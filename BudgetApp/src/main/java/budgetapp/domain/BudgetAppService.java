@@ -1,18 +1,36 @@
 
 package budgetapp.domain;
 
-import budgetapp.dao.InitialDao;
+import budgetapp.dao.Dao;
 import java.time.Month;
 import java.util.List;
 
+/*
+ * The class responsible for the logic
+ */
+
 public class BudgetAppService {
-    private InitialDao initDao = new InitialDao();
+    private Dao transactionDao;
+    
+    public BudgetAppService(Dao dao) {
+        this.transactionDao = dao;
+    }
+    
+    /**
+     * Adding a new transaction to the current month
+     *
+     * @param amount the transaction amount
+     */
     
     public boolean addTransaction(double amount) {
         if (amount == 0) {
             return false;
         } else {
-            initDao.save(new Transaction(amount));
+            try {
+                transactionDao.create(new Transaction(amount));
+            } catch (Exception ex) {
+                return false;
+            }
             return true;
         }
     }
@@ -21,7 +39,11 @@ public class BudgetAppService {
         if (amount == 0) {
             return false;
         } else {
-            initDao.save(new Transaction(amount, month));
+            try {
+                transactionDao.create(new Transaction(amount, month));
+            } catch (Exception ex) {
+                return false;
+            }
             return true;
         }
     }
@@ -31,7 +53,11 @@ public class BudgetAppService {
             return false;
         } else {
             for (int i = startingMonth; i <= endingMonth; i++) {
-                initDao.save(new Transaction(amount, i));
+                try {
+                    transactionDao.create(new Transaction(amount, i));
+                } catch (Exception ex) {
+                    return false;
+                }
             }
             return true;
         }    
@@ -71,11 +97,11 @@ public class BudgetAppService {
     }
     
     public List<Transaction> getTransactionOfMonth(int month) {
-        return initDao.findAllOfMonth(month);
+        return transactionDao.findAllOfMonth(month);
     }
     
     public List<Transaction> getTransactions() {
-        return initDao.findAll();
+        return transactionDao.findAll();
     }
     
     public Enum<Month> getMonth(int value) {

@@ -1,19 +1,18 @@
 
 package budgetapp.dao;
 
-import java.sql.*;
+import budgetapp.domain.Transaction;
 import java.util.*;
 
-public interface Dao<T, K> {
-    
-    T findOne(K key) throws SQLException;
+public interface Dao {
 
-    List<T> findAll() throws SQLException;
+    List<Transaction> findAll();
     
-    void save(T object) throws SQLException;
-    
-    void update(T object) throws SQLException;
+    void update(int id, double amount, int month) throws Exception;
 
-    void delete(K key) throws SQLException;
+    void delete(int id) throws Exception;
     
+    Transaction create(Transaction transaction) throws Exception;
+    
+    List<Transaction> findAllOfMonth (int month);
 }
