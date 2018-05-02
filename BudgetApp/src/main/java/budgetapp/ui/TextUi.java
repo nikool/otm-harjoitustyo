@@ -3,6 +3,7 @@ package budgetapp.ui;
 
 import budgetapp.domain.BudgetAppService;
 import budgetapp.domain.Statistics;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -193,7 +194,7 @@ public class TextUi {
         for (int i = 1; i < 13; i++) {
             double amount = statistics.endTotal(budgetService.getTransactionOfMonth(i));
             double average = statistics.dailyAverage(budgetService.getTransactionOfMonth(i), i);
-            System.out.println(budgetService.getMonth(i).toString() + ": " + amount + ", daily average: " + average);
+            System.out.println(Month.of(i) + ": " + amount + ", daily average: " + average);
         }
     }
     
