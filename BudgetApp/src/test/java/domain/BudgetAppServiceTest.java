@@ -1,3 +1,5 @@
+package domain;
+
 
 import budgetapp.domain.BudgetAppService;
 import budgetapp.domain.Transaction;
@@ -17,6 +19,7 @@ public class BudgetAppServiceTest {
     BudgetAppService budgetService;
     Date date = new Date();
     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    TestTransactionDao transactionDao;
     
     public BudgetAppServiceTest() { 
     }
@@ -31,7 +34,8 @@ public class BudgetAppServiceTest {
     
     @Before
     public void setUp() {
-        budgetService = new BudgetAppService();
+        transactionDao = new TestTransactionDao();
+        budgetService = new BudgetAppService(transactionDao);
         budgetService.addTransaction(1);
         budgetService.addTransactionToMonth(1, 12);
     }
