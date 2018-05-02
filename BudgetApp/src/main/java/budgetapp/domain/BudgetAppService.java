@@ -120,7 +120,7 @@ public class BudgetAppService {
         try {
             transactionDao.delete(transaction.getId());
         } catch (Exception e) {
-                System.out.println("Removeal failed due to: " + e.getMessage());
+            System.out.println("Removeal failed due to: " + e.getMessage());
         }
     }
     
