@@ -1,25 +1,20 @@
 
 package budgetapp.ui;
 
-import budgetapp.dao.InitialDao;
 import budgetapp.domain.BudgetAppService;
 import budgetapp.domain.Statistics;
-import budgetapp.domain.Transaction;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class TextUi {
     private Scanner scanner;
-    private InitialDao initDao = new InitialDao();
     private BudgetAppService budgetService;  
     private List<String> commands = new ArrayList<>();
     private boolean exit = false;
     private Statistics statistics = new Statistics();
     
-    public TextUi(Scanner scanner, BudgetAppService service) { 
+    public TextUi(Scanner scanner, BudgetAppService service) {
         this.scanner = scanner;
         this.budgetService = service;
         commands.add("a | add a new expense or an income");
