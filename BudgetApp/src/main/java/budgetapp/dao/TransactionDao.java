@@ -10,10 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A data access object for transactions, implements the dao interface
+ * @author nikoo
+ */
 public class TransactionDao implements Dao {
     public List<Transaction> transactions;
     private String file;
     
+    /**
+     * Constructs a new TransactionDao with a specified save file.
+     * Checks if a file already exists, if not, creates a new one.
+     * @param file a file where the apps data is stored
+     * @throws Exception 
+     */
     public TransactionDao(String file) throws Exception {
         transactions = new ArrayList<>();
         this.file = file;
@@ -39,10 +49,17 @@ public class TransactionDao implements Dao {
         }
     }
     
+    /**
+     * Generates a new id for a transaction from the list size
+     * @return 
+     */
     private int generateId() {
         return transactions.size() + 1;
     }
     
+    /**
+     * Saves any changes to the file
+     */
     private void save() {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Transaction transaction : transactions) {

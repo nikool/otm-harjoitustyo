@@ -5,7 +5,7 @@ import budgetapp.dao.Dao;
 import java.time.Month;
 import java.util.List;
 
-/*
+/**
  * The class responsible for the logic
  */
 
@@ -20,8 +20,9 @@ public class BudgetAppService {
      * Adding a new transaction to the current month
      *
      * @param amount the transaction amount
+     * 
+     * @return boolean if adding worked
      */
-    
     public boolean addTransaction(double amount) {
         if (amount == 0) {
             return false;
@@ -35,6 +36,14 @@ public class BudgetAppService {
         }
     }
     
+    /**
+     * Adding a transaction to a specific month
+     * 
+     * @param amount the transaction amount
+     * @param month the month user wants the transaction added to
+     * 
+     * @return boolean on did it work
+     */
     public boolean addTransactionToMonth(double amount, int month) {
         if (amount == 0) {
             return false;
@@ -48,6 +57,13 @@ public class BudgetAppService {
         }
     }
     
+    /**
+     * Add a recurring transactions to the specified timeframe
+     * @param amount
+     * @param startingMonth from which month to start
+     * @param endingMonth to which month to end
+     * @return 
+     */
     public boolean addRecurringTransaction(double amount, int startingMonth, int endingMonth) {
         if (amount == 0) {
             return false;
@@ -63,6 +79,11 @@ public class BudgetAppService {
         }    
     }
     
+    /**
+     * Check that the users input is a double value
+     * @param input
+     * @return 
+     */
     public boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
@@ -72,6 +93,11 @@ public class BudgetAppService {
         }
     }
     
+    /**
+     * Print all the transactions of the parameter list
+     * @param list a list of transactions
+     * @return 
+     */
     public String printAllTransactions(List<Transaction> list) {
         StringBuilder sb = new StringBuilder();
         
@@ -80,6 +106,11 @@ public class BudgetAppService {
         return sb.toString();
     }
     
+    /**
+     * Check that the user input is a value for a month
+     * @param input
+     * @return 
+     */
     public boolean isMonth(String input) {
         
         try {
@@ -96,6 +127,11 @@ public class BudgetAppService {
         }       
     }
     
+    /**
+     * Returns a list of transactions for a specific month
+     * @param month
+     * @return 
+     */
     public List<Transaction> getTransactionOfMonth(int month) {
         return transactionDao.findAllOfMonth(month);
     }
@@ -104,6 +140,11 @@ public class BudgetAppService {
         return transactionDao.findAll();
     }
     
+    /**
+     * Check that the users requested transaction exists
+     * @param id the id of the wanted transaction
+     * @return 
+     */
     public boolean transactionExists(int id) {
         if (transactionDao.findOne(id) != null) {
             return true;
@@ -116,6 +157,10 @@ public class BudgetAppService {
         return transactionDao.findOne(id);
     }
     
+    /**
+     * Remove the specified transaction
+     * @param transaction 
+     */
     public void removeTransaction(Transaction transaction) {
         try {
             transactionDao.delete(transaction.getId());
@@ -124,6 +169,9 @@ public class BudgetAppService {
         }
     }
     
+    /**
+     * Remove all transactions
+     */
     public void removeAllTransactions() {
         transactionDao.deleteAll();
     }

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A text-based ui
+ * @author nikoo
+ */
 public class TextUi {
     private Scanner scanner;
     private BudgetAppService budgetService;  
@@ -15,6 +19,11 @@ public class TextUi {
     private boolean exit = false;
     private Statistics statistics = new Statistics();
     
+    /**
+     * Creates a new textui and adds commands to the list, starts the ui
+     * @param scanner
+     * @param service injects the BudgetAppService to the Ui
+     */
     public TextUi(Scanner scanner, BudgetAppService service) {
         this.scanner = scanner;
         this.budgetService = service;
@@ -27,6 +36,9 @@ public class TextUi {
         startUi();
     }
     
+    /**
+     * Starts and ends the ui
+     */
     public void startUi() {
         System.out.println("");
         System.out.println("Welcome to the BudgetApp!");
@@ -38,6 +50,10 @@ public class TextUi {
         System.out.println("Thanks for using the BudgetApp!");
     }
     
+    /**
+     * Returns a list of possible commands to the ui
+     * @return 
+     */
     public String commands() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n").append("Here are the available commands:").append("\n");
@@ -45,6 +61,9 @@ public class TextUi {
         return sb.toString();
     }
     
+    /**
+     * Scans user input and chooses an action based on it
+     */
     public void userInput() {
         while (true) {
             String input = scanner.nextLine();
@@ -74,6 +93,9 @@ public class TextUi {
         } 
     }
     
+    /**
+     * Adds a new transaction either to the current month, a specific month or a recurring transaction to multiple months
+     */
     public void addTransaction() {
         double amount = 0;
         int month = 0;
@@ -164,6 +186,9 @@ public class TextUi {
         }
     }
     
+    /**
+     * Lists all transactions
+     */
     private void listTransactions() {
         System.out.println("");
         System.out.println("List of all transactions:");
@@ -171,6 +196,9 @@ public class TextUi {
         System.out.println(budgetService.printAllTransactions(budgetService.getTransactions()));
     }
     
+    /**
+     * Lists transactions of the user desired month
+     */
     private void listTransactionsOfAMonth() {
         int month = 0;
         
@@ -190,6 +218,9 @@ public class TextUi {
         System.out.println(budgetService.printAllTransactions(budgetService.getTransactionOfMonth(month)));
     }
     
+    /**
+     * Gives statistics of all months
+     */
     private void statistics() {
         System.out.println("");
         System.out.println("Statistics");
@@ -203,6 +234,9 @@ public class TextUi {
         }
     }
     
+    /**
+     * Removes either a single or all transactions
+     */
     private void removeTransaction() {
         int idNumber = -1;
         boolean removedAll = false;

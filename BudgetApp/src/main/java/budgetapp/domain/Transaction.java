@@ -6,12 +6,20 @@ import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+     * A class that depicts a single transaction
+     * 
+     */
 public class Transaction {
     
     private int id;
     private Double amount;
     private Enum month;
 
+    /**
+     * Add a transaction to the current month
+     * @param amount 
+     */
     public Transaction(Double amount) {       
         this.amount = amount;
         
@@ -20,11 +28,22 @@ public class Transaction {
         this.month = localDate.getMonth();        
     }
     
+    /**
+     * Add a transaction to a specific month
+     * @param amount
+     * @param month 
+     */
     public Transaction(Double amount, int month) {    
         this.amount = amount;       
         this.month = Month.of(month);    
     }
     
+    /**
+     * Add a transaction with an id to a specific month
+     * @param id
+     * @param amount
+     * @param month 
+     */
     public Transaction(int id, double amount, int month) {
         this.id = id;
         this.amount = amount;

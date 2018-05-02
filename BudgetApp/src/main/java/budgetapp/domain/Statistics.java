@@ -9,6 +9,11 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * A class for the needed mathematics
+ * 
+ * @author nikoo
+ */
 public class Statistics {
     
     private  List<Transaction> list;
@@ -16,6 +21,12 @@ public class Statistics {
     LocalDate localDate;
     Date date = new Date();
     
+    /**
+     * Returns the daily average consumption/income of a specific month
+     * @param listOfTransactions months transactions
+     * @param month month in question
+     * @return 
+     */
     public double dailyAverage(List<Transaction> listOfTransactions, int month) {
         list = listOfTransactions;   
         result = endTotal(list);
@@ -29,6 +40,11 @@ public class Statistics {
         return average;
     }
     
+    /**
+     * The end total of a specific month
+     * @param listOfTransactions
+     * @return 
+     */
     public double endTotal(List<Transaction> listOfTransactions) {
         list = listOfTransactions;
         result = 0;
@@ -40,6 +56,11 @@ public class Statistics {
         return result;
     }
     
+    /**
+     * Rounds a double value to two decimals
+     * @param value a non rounded double
+     * @return 
+     */
     private double round(double value) {
         double amount = value;
         amount = amount * 100;
