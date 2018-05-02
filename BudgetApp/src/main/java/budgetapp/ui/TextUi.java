@@ -21,6 +21,7 @@ public class TextUi {
         commands.add("a | add a new expense or an income");
         commands.add("l | list all transactions");
         commands.add("m | list transactions of a specific month");
+        commands.add("r | remove a transaction");
         commands.add("s | show statistics");
         commands.add("e | exit BudgetApp");
         startUi();
@@ -62,6 +63,9 @@ public class TextUi {
                 break;
             } else if (input.equals("s")) {
                 statistics();
+                break;
+            } else if (input.equals("r")) {
+                removeTransaction();
                 break;
             } else {
                 System.out.println("Please input a valid command!");
@@ -122,6 +126,7 @@ public class TextUi {
                     int endingMonth = Integer.parseInt(bits[1]);
                     budgetService.addRecurringTransaction(amount, startingMonth, endingMonth);
                     recurringAdded = true;
+                    System.out.println("Transactions added!");
                     break;
                 }
                 if (!budgetService.isMonth(monthValue)) {
@@ -195,6 +200,41 @@ public class TextUi {
             double amount = statistics.endTotal(budgetService.getTransactionOfMonth(i));
             double average = statistics.dailyAverage(budgetService.getTransactionOfMonth(i), i);
             System.out.println(Month.of(i) + ": " + amount + ", daily average: " + average);
+        }
+    }
+    
+    private void removeTransaction() {
+        int idNumber = -1;
+        boolean removedAll = false;
+        System.out.println("");
+        System.out.println("Input the transaction id of the transaction you want to remove, to remove all transactions input 'x':");
+        System.out.println("");
+        while (true) {
+            String id = scanner.nextLine();
+            if (id.equals("x")) {
+                budgetService.removeAllTransactions();
+                System.out.println("All transactions removed!");
+                break;
+            }
+            try {
+                idNumber = Integer.parseInt(id);
+            } catch (Exception e) {
+                System.out.println("Please input a valid number!");
+            }
+            if (idNumber < 0) {
+                System.out.println("Id can't be a negative number.");;
+            } else {
+                break;
+            }
+        }
+        if (removedAll) {
+            if (!budgetService.transactionExists(idNumber)) {
+                System.out.println("The id doesn't match any transaction.");
+            } else {
+                budgetService.removeTransaction(budgetService.getTransaction(idNumber));
+                System.out.println("Transaction removed!");
+            }
+            removedAll = false;
         }
     }
     

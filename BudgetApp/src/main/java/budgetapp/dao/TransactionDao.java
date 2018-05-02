@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -95,5 +96,20 @@ public class TransactionDao implements Dao {
             }
         }
         return transactionsOfMonth;
+    }
+    
+    @Override
+    public Transaction findOne(int id) {
+        for (Transaction t : transactions) {
+            if (t.getId() == id) {
+                return t;
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public void deleteAll() {
+        transactions.removeAll(transactions);
     }
 }

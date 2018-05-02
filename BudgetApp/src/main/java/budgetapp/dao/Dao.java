@@ -15,4 +15,8 @@ public interface Dao {
     Transaction create(Transaction transaction) throws Exception;
     
     List<Transaction> findAllOfMonth(int month);
+    
+    Transaction findOne(int id);
+    
+    void deleteAll();
 }

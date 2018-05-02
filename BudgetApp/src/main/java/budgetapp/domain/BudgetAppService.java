@@ -75,7 +75,7 @@ public class BudgetAppService {
     public String printAllTransactions(List<Transaction> list) {
         StringBuilder sb = new StringBuilder();
         
-        list.stream().forEach(t -> sb.append(t.getAmount()).append(", ").append(t.getMonth()).append("\n"));
+        list.stream().forEach(t -> sb.append(t.getId()).append(" | ").append(t.getAmount()).append(", ").append(t.getMonth()).append("\n"));
         
         return sb.toString();
     }
@@ -102,5 +102,29 @@ public class BudgetAppService {
     
     public List<Transaction> getTransactions() {
         return transactionDao.findAll();
+    }
+    
+    public boolean transactionExists(int id) {
+        if (transactionDao.findOne(id) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public Transaction getTransaction(int id) {
+        return transactionDao.findOne(id);
+    }
+    
+    public void removeTransaction(Transaction transaction) {
+        try {
+            transactionDao.delete(transaction.getId());
+        } catch (Exception e) {
+                System.out.println("Removeal failed due to: " + e.getMessage());
+        }
+    }
+    
+    public void removeAllTransactions() {
+        transactionDao.deleteAll();
     }
 }
