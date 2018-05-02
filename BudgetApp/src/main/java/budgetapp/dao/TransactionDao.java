@@ -43,13 +43,15 @@ public class TransactionDao implements Dao {
         return transactions.size() + 1;
     }
     
-    private void save() throws Exception {
+    private void save() {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Transaction transaction : transactions) {
                 writer.write(transaction.getId() + ";" 
                         + transaction.getAmount() + ";" 
                         + (transaction.getMonth().ordinal() + 1) + "\n");
             }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -70,7 +72,7 @@ public class TransactionDao implements Dao {
     }
 
     @Override
-    public void delete(int id) throws Exception {
+    public void delete(int id) {
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getId() == id) {
                 transactions.remove(i);

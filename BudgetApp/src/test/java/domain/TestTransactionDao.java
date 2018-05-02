@@ -54,5 +54,20 @@ public class TestTransactionDao implements Dao {
         }
         return transactionsOfMonth;
     }
+
+    @Override
+    public Transaction findOne(int id) {
+        for (Transaction t : transactions) {
+            if (t.getId() == id) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteAll() {
+        transactions.removeAll(transactions);
+    }
     
 }

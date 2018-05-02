@@ -10,7 +10,7 @@ public interface Dao {
     
     void update(int id, double amount, int month) throws Exception;
 
-    void delete(int id) throws Exception;
+    void delete(int id);
     
     Transaction create(Transaction transaction) throws Exception;
     

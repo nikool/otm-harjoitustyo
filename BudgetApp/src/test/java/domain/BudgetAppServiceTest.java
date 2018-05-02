@@ -73,6 +73,36 @@ public class BudgetAppServiceTest {
     
     @Test
     public void addTransactionAddsToCurrentMonth() {
-        assertEquals("1.0, " + localDate.getMonth() + "\n", budgetService.printAllTransactions(budgetService.getTransactionOfMonth(localDate.getMonthValue())));
+        assertEquals("1 | 1.0, " + localDate.getMonth() + "\n", budgetService.printAllTransactions(budgetService.getTransactionOfMonth(localDate.getMonthValue())));
+    }
+    
+    @Test
+    public void addTransactionReturnsFalseForZero() {
+        assertEquals(false,budgetService.addTransaction(0));
+    }
+    
+    @Test
+    public void removeAllIsWorking() {
+        budgetService.removeAllTransactions();
+        assertEquals("", budgetService.printAllTransactions(budgetService.getTransactions()));
+    }
+    @Test
+    public void getTransactionsReturnsCorrectly() {
+        assertEquals("1 | 1.0, " + localDate.getMonth() + "\n" + "2 | 1.0, " + Month.DECEMBER + "\n", budgetService.printAllTransactions(budgetService.getTransactions()));
+    }
+    
+    @Test
+    public void transactionsAreFoundIfExisting() {
+        assertEquals(true, budgetService.transactionExists(1));
+    }
+    
+    @Test
+    public void transactionsAreNotFoundIfNotExisting() {
+        assertEquals(false, budgetService.transactionExists(99));
+    }
+    
+    @Test
+    public void recurringCantAddZero() {
+        assertEquals(false, budgetService.addRecurringTransaction(0, 1, 12));
     }
 }

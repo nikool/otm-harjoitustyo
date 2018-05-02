@@ -1,3 +1,5 @@
+package domain;
+
 
 import budgetapp.domain.Transaction;
 import java.time.Month;
@@ -12,6 +14,7 @@ public class TransactionTest {
     
     Transaction transactionCurrentMonth;
     Transaction transactionSpecificMonth;
+    Transaction transactionWithId;
     
     public TransactionTest() {
     }
@@ -28,6 +31,7 @@ public class TransactionTest {
     public void setUp() {
         transactionCurrentMonth = new Transaction(10.0);
         transactionSpecificMonth = new Transaction(10.0, 1);
+        transactionWithId = new Transaction(1, 10.0, 1);
     }
     
     @After
@@ -39,14 +43,25 @@ public class TransactionTest {
     //
     @Test
     public void constructorAddsCorrectAmount() {
-        
         assertEquals("Transaction amount: 10.0", transactionCurrentMonth.toString());
     }
     
     @Test
     public void constructorAddsCorrectMonth() {
-        
         assertEquals("Transaction amount: 10.0", transactionSpecificMonth.toString());
         assertEquals(Month.JANUARY, transactionSpecificMonth.getMonth());
+    }
+    
+    @Test
+    public void settersWorks() {
+        transactionSpecificMonth.setAmount(5.0);
+        transactionSpecificMonth.setMonth(Month.DECEMBER);
+        assertEquals("Transaction amount: 5.0", transactionSpecificMonth.toString());
+        assertEquals(Month.DECEMBER, transactionSpecificMonth.getMonth());
+    }
+    
+    @Test
+    public void idGetsSet() {
+        assertEquals(1, transactionWithId.getId());
     }
 }
