@@ -29,7 +29,7 @@ public class TestTransactionDao implements Dao {
     }
 
     @Override
-    public void delete(int id) throws Exception {
+    public void delete(int id) {
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getId() == id) {
                 transactions.remove(i);
