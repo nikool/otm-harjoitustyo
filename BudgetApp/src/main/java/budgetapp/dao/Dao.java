@@ -12,44 +12,44 @@ public interface Dao {
     
     /**
      * returns a list of all transactions
-     * @return 
+     * @return returns all transactions
      */
     List<Transaction> findAll();
     
     /**
      * Updates a specific transactions amount, month or both
-     * @param id
-     * @param amount
-     * @param month
+     * @param id the id number of the transaction to be updated
+     * @param amount the new amount for the transaction
+     * @param month the new month for the transaction
      * @throws Exception 
      */
     void update(int id, double amount, int month) throws Exception;
     
     /**
      * Deletes the transaction with the specified id
-     * @param id 
+     * @param id the id of the transaction to be deleted
      */
     void delete(int id);
     
     /**
      * Creates a new transaction with an id and returns it
-     * @param transaction
-     * @return
+     * @param transaction the original transaction
+     * @return a new transaction with an id
      * @throws Exception 
      */
     Transaction create(Transaction transaction) throws Exception;
     
     /**
      * Return a list of the specified months transactions
-     * @param month
-     * @return 
+     * @param month the month of which transactions to get
+     * @return returns a list of all the months transactions
      */
     List<Transaction> findAllOfMonth(int month);
     
     /**
      * Returns the transaction with the specific id
-     * @param id
-     * @return 
+     * @param id the id of the transaction to be returned
+     * @return the found transaction
      */
     Transaction findOne(int id);
     
