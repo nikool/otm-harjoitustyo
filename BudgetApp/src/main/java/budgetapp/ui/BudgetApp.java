@@ -20,6 +20,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -114,7 +115,10 @@ public class BudgetApp extends Application {
         
         // Statistics scene
         
-        BorderPane statisticsPane = new BorderPane();
+        GridPane statisticsPane = new GridPane();
+        statisticsPane.setVgap(10);
+        statisticsPane.setHgap(10);
+        statisticsPane.setPadding(new Insets(10, 10, 10, 10));
         
         VBox selectMonth = new VBox();
         selectMonth.setPadding(new Insets(10));
@@ -122,7 +126,7 @@ public class BudgetApp extends Application {
         
         Text topTitle = new Text("BudgetApp | statistics");
         topTitle.setFont(Font.font("Arial", FontWeight.BOLD, 32));
-        statisticsPane.setTop(topTitle);
+        statisticsPane.add(topTitle, 0, 0);
         
         Text leftTitle = new Text("Select month:");
         leftTitle.setFont(Font.font("Arial", FontWeight.BOLD, 16));
@@ -151,11 +155,14 @@ public class BudgetApp extends Application {
             (ObservableValue<? extends Toggle> ov, Toggle old_toggle,
             Toggle new_toggle) -> {
                 if (group.getSelectedToggle() != null) {
-                    statisticsPane.setCenter(monthStatistics((int) group.getSelectedToggle().getUserData()));
+                    if (statisticsPane.getChildren().size() > 2) {
+                        statisticsPane.getChildren().remove(2);
+                    }
+                    statisticsPane.add(monthStatistics((int) group.getSelectedToggle().getUserData()), 1, 1);
                 }
         });
         
-        statisticsPane.setLeft(selectMonth);
+        statisticsPane.add(selectMonth, 0, 1);
         
         statisticsScene = new Scene(statisticsPane, 1280, 720);
         
