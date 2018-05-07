@@ -17,6 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
@@ -113,15 +115,20 @@ public class BudgetApp extends Application {
             XYChart.Series series2 = new XYChart.Series<>();
             series2.setName("Incomes");
             
+            XYChart.Series series3 = new XYChart.Series<>();
+            series3.setName("Daily averages");
+            
             for (int i = 1; i < 13; i++) {
                 double expensesOfMonth = statistics.endTotal(budgetappService.getAllExpensesOfMonth(i)) * - 1;
                 double incomesOfMonth = statistics.endTotal(budgetappService.getAllIncomesOfMonth(i));
                 series1.getData().add(new XYChart.Data(i, expensesOfMonth));
                 series2.getData().add(new XYChart.Data(i, incomesOfMonth));
+                series3.getData().add(new XYChart.Data(i, statistics.dailyAverage(budgetappService.getTransactionOfMonth(i), i)));
             }
             
             chart.getData().add(series1);
             chart.getData().add(series2);
+            chart.getData().add(series3);
             
             yearStatPane.add(chart, 1, 0);
             
@@ -141,13 +148,15 @@ public class BudgetApp extends Application {
         ListView listOfTransactions = new ListView(listOfTransactionsInMonth);
         
         for (int i = 0; i < transactions.size(); i++) {
-            Text transaction = new Text(transactions.get(i).toString());
-            listOfTransactionsInMonth.add(transaction);
+            listOfTransactionsInMonth.add(transactions.get(i));
         }
         
         verticalList.getChildren().add(listOfTransactions);
         
-        // A button to remove all transactions of a single month
+        // Buttons for removing transactions
+        
+        HBox buttons = new HBox();
+        buttons.setSpacing(10);
         
         Button removeAll = new Button("Remove all");
         removeAll.setOnAction((ActionEvent e) -> {
@@ -159,7 +168,16 @@ public class BudgetApp extends Application {
                 
                 listToRemove.stream().forEach(t -> budgetappService.removeTransaction(t));
             });
-        verticalList.getChildren().add(removeAll);
+        buttons.getChildren().add(removeAll);
+        
+        Button removeSelected = new Button("Remove selected");
+        removeSelected.setOnAction((ActionEvent e) -> {
+            budgetappService.removeTransaction((Transaction) listOfTransactions.getSelectionModel().getSelectedItem());
+        });
+        
+        buttons.getChildren().add(removeSelected);
+        
+        verticalList.getChildren().add(buttons);
         
         monthStatPane.add(verticalList, 0, 0);
         
@@ -303,7 +321,7 @@ public class BudgetApp extends Application {
         bottomVert.getChildren().add(bottomTitle);
         
         Text bottomHelper1 = new Text("Remember to add a minus sign infront of the amount to add an expense.");
-        Text bottomHelper2 = new Text("To add the transaction to the current month, leave the month-field empty.\n To add an recurring transaction enter the starting and ending months with a space in beetween.");
+        Text bottomHelper2 = new Text("To add the transaction to the current month, leave the month-field empty.\nTo add an recurring transaction enter the starting and ending months with a space in beetween.");
         bottomVert.getChildren().add(bottomHelper1);
         
         HBox transactionAdd = new HBox();
@@ -338,32 +356,34 @@ public class BudgetApp extends Application {
                     amount.clear();
                     labelPrompt.setText("Transaction added!");
                 }
-                String input = month.getText();
-                String[] bits = input.split(" ");
-                
-                if (bits.length == 1) {
-                    if (!budgetappService.isMonth(bits[0])) {
-                        labelPrompt.setText("The month value has to be beetween 1 and 12!");
-                    } else {
-                        budgetappService.addTransactionToMonth(amountDouble, Integer.parseInt(bits[0]));
-                        labelPrompt.setText("Transaction added!");
-                        amount.clear();
-                        month.clear();
-                    }
-                } else if (bits.length == 2) {
-                    if (!budgetappService.isMonth(bits[0]) || !budgetappService.isMonth(bits[1])) {
-                        labelPrompt.setText("The month value has to be beetween 1 and 12! Remember to add a space beetween the starting and ending months.");
-                    } else {
-                        int startingMonth = Integer.parseInt(bits[0]);
-                        int endingMonth = Integer.parseInt(bits[1]);
-                        
-                        if (startingMonth > endingMonth) {
-                            labelPrompt.setText("The starting month has to be earlier than the ending month.");
+                if (!month.getText().isEmpty()) {
+                    String input = month.getText();
+                    String[] bits = input.split(" ");
+
+                    if (bits.length == 1) {
+                        if (!budgetappService.isMonth(bits[0])) {
+                            labelPrompt.setText("The month value has to be beetween 1 and 12!");
                         } else {
-                            budgetappService.addRecurringTransaction(amountDouble, startingMonth, endingMonth);
+                            budgetappService.addTransactionToMonth(amountDouble, Integer.parseInt(bits[0]));
                             labelPrompt.setText("Transaction added!");
                             amount.clear();
                             month.clear();
+                        }
+                    } else if (bits.length == 2) {
+                        if (!budgetappService.isMonth(bits[0]) || !budgetappService.isMonth(bits[1])) {
+                            labelPrompt.setText("The month value has to be beetween 1 and 12! Remember to add a space beetween the starting and ending months.");
+                        } else {
+                            int startingMonth = Integer.parseInt(bits[0]);
+                            int endingMonth = Integer.parseInt(bits[1]);
+
+                            if (startingMonth > endingMonth) {
+                                labelPrompt.setText("The starting month has to be earlier than the ending month.");
+                            } else {
+                                budgetappService.addRecurringTransaction(amountDouble, startingMonth, endingMonth);
+                                labelPrompt.setText("Transaction added!");
+                                amount.clear();
+                                month.clear();
+                            }
                         }
                     }
                 }

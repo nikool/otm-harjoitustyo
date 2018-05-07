@@ -30,12 +30,17 @@ public class Statistics {
     public double dailyAverage(List<Transaction> listOfTransactions, int month) {
         list = listOfTransactions;   
         result = endTotal(list);
+        
         localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         YearMonth yearMonthObject = YearMonth.of(localDate.getYear(), month);
         int daysInMonth = yearMonthObject.lengthOfMonth();
         
+        System.out.println("Test 2 " + daysInMonth);
+        
         double average = result / daysInMonth;
         average = round(average);
+        
+        System.out.println("Test 2 " + average);
         
         return average;
     }

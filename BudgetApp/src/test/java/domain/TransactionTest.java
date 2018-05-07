@@ -43,12 +43,12 @@ public class TransactionTest {
     //
     @Test
     public void constructorAddsCorrectAmount() {
-        assertEquals("Transaction amount: 10.0", transactionCurrentMonth.toString());
+        assertEquals("10.0", transactionCurrentMonth.toString());
     }
     
     @Test
     public void constructorAddsCorrectMonth() {
-        assertEquals("Transaction amount: 10.0", transactionSpecificMonth.toString());
+        assertEquals("10.0", transactionSpecificMonth.toString());
         assertEquals(Month.JANUARY, transactionSpecificMonth.getMonth());
     }
     
@@ -56,7 +56,7 @@ public class TransactionTest {
     public void settersWorks() {
         transactionSpecificMonth.setAmount(5.0);
         transactionSpecificMonth.setMonth(Month.DECEMBER);
-        assertEquals("Transaction amount: 5.0", transactionSpecificMonth.toString());
+        assertEquals("5.0", transactionSpecificMonth.toString());
         assertEquals(Month.DECEMBER, transactionSpecificMonth.getMonth());
     }
     
