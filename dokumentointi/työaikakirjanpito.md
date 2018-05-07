@@ -13,5 +13,6 @@
 | 2.5. | 5 | vaihdettu sovellus käyttämään tiedostoa tiedon tallennukseen |
 | 2.5. | 2 | lisätty testejä |
 | 2.5. | 1 | aloitettu javadoc |
+| 7.5. | 8 | luotu graafinen käyttöliittymä sovellukselle |
 | | | |
-| | 22 | yhteensä|
+| | 30 | yhteensä|
