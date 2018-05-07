@@ -5,7 +5,6 @@ import budgetapp.dao.TransactionDao;
 import budgetapp.domain.BudgetAppService;
 import budgetapp.domain.Statistics;
 import budgetapp.domain.Transaction;
-import budgetapp.ui.TextUi;
 import java.io.FileInputStream;
 import java.time.Month;
 import java.time.format.TextStyle;
@@ -13,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,6 +25,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
@@ -51,6 +52,11 @@ public class BudgetApp extends Application {
         launch(args);
     }
     
+    /**
+     * A helper method for drawing the graphs and printing the transactions
+     * @param month the month the user wants information of, 13 for the whole years data
+     * @return returns a GridPane node containing the statistics and graphs
+     */
     private Node monthStatistics(int month) {
         List<Transaction> transactions = new ArrayList<>();
         transactions = budgetappService.getTransactionOfMonth(month);
@@ -64,62 +70,98 @@ public class BudgetApp extends Application {
             
             // A list of monthly totals
             
-            VBox listOfMonthTotals = new VBox();
-            listOfMonthTotals.setPadding(new Insets(10));
-            listOfMonthTotals.setSpacing(5);
+            VBox yearVerticalList = new VBox();
+            yearVerticalList.setPadding(new Insets(10));
+            yearVerticalList.setSpacing(5);
             
-            listOfMonthTotals.getChildren().add(new Text("List of all monthly end totals:"));
+            yearVerticalList.getChildren().add(new Text("List of all monthly end totals:"));
+            
+            ObservableList dataOfMonthlyTotals = FXCollections.observableArrayList();
+            ListView listOfMonthlyTotals = new ListView(dataOfMonthlyTotals);
             
             for (int i = 1; i < 13; i++) {
-                listOfMonthTotals.getChildren().add(new Text(Month.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH) 
+                dataOfMonthlyTotals.add(new Text(Month.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH) 
                         + ": " + statistics.endTotal(budgetappService.getTransactionOfMonth(i))));
             }
             
-            yearStatPane.add(listOfMonthTotals, 0, 0);
+            yearVerticalList.getChildren().add(listOfMonthlyTotals);
             
-            // Pie charts of monthly consumption and income
+            // A button to remove all transactions
             
-            PieChart pieChartExpenditures = new PieChart();
-            PieChart pieChartIncome = new PieChart();
+            Button removeAll = new Button("Remove all");
+            removeAll.setOnAction((ActionEvent e) -> {
+                budgetappService.removeAllTransactions();
+            });
+            
+            yearVerticalList.getChildren().add(removeAll);
+            
+            yearStatPane.add(yearVerticalList, 0, 0);
+            
+            // A line graph of the account balance for the whole year
+            
+            NumberAxis xAxis = new NumberAxis();
+            NumberAxis yAxis = new NumberAxis();
+            xAxis.setLabel("Months");
+            yAxis.setLabel("Amount");
+            
+            LineChart<Number, Number> chart = new LineChart<>(xAxis, yAxis);
+            chart.setTitle("Transactions of the whole year");
+            
+            XYChart.Series series1 = new XYChart.Series<>();
+            series1.setName("Expenses");
+            
+            XYChart.Series series2 = new XYChart.Series<>();
+            series2.setName("Incomes");
             
             for (int i = 1; i < 13; i++) {
-                ObservableList<PieChart.Data> expenditurePieChartData = FXCollections.observableArrayList();
-                
-                expenditurePieChartData.add(new PieChart.Data(Month.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH), 
-                        statistics.endTotal(budgetappService.getAllExpensesOfMonth(i))));
-                
-                pieChartExpenditures.getData().addAll(expenditurePieChartData);
+                double expensesOfMonth = statistics.endTotal(budgetappService.getAllExpensesOfMonth(i)) * - 1;
+                double incomesOfMonth = statistics.endTotal(budgetappService.getAllIncomesOfMonth(i));
+                series1.getData().add(new XYChart.Data(i, expensesOfMonth));
+                series2.getData().add(new XYChart.Data(i, incomesOfMonth));
             }
-            pieChartExpenditures.setTitle("Monthly expenditures");
-            yearStatPane.add(pieChartExpenditures, 1, 0);
             
-            for (int i = 1; i < 13; i++) {
-                ObservableList<PieChart.Data> incomePieChartData = FXCollections.observableArrayList(
-                new PieChart.Data(Month.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH), 
-                        statistics.endTotal(budgetappService.getAllExpensesOfMonth(i))));
-                
-                pieChartIncome.getData().addAll(incomePieChartData);
-            }
-            pieChartIncome.setTitle("Monthly incomes");
-            yearStatPane.add(pieChartIncome, 2, 0);
+            chart.getData().add(series1);
+            chart.getData().add(series2);
+            
+            yearStatPane.add(chart, 1, 0);
             
             return yearStatPane;
         }
         
         // A list of the months transactions
         
-        VBox listOfTransactions = new VBox();
-        listOfTransactions.setPadding(new Insets(10));
-        listOfTransactions.setSpacing(5);
+        VBox verticalList = new VBox();
+        verticalList.setPadding(new Insets(10));
+        verticalList.setSpacing(5);
         
         Text leftTitle = new Text("List of all transactions:");
-        listOfTransactions.getChildren().add(leftTitle);
+        verticalList.getChildren().add(leftTitle);
+        
+        ObservableList listOfTransactionsInMonth = FXCollections.observableArrayList();
+        ListView listOfTransactions = new ListView(listOfTransactionsInMonth);
         
         for (int i = 0; i < transactions.size(); i++) {
             Text transaction = new Text(transactions.get(i).toString());
-            listOfTransactions.getChildren().add(transaction);
+            listOfTransactionsInMonth.add(transaction);
         }
-        monthStatPane.add(listOfTransactions, 0, 0);
+        
+        verticalList.getChildren().add(listOfTransactions);
+        
+        // A button to remove all transactions of a single month
+        
+        Button removeAll = new Button("Remove all");
+        removeAll.setOnAction((ActionEvent e) -> {
+                List<Transaction> listToRemove = new ArrayList<>();
+                
+                for (int i = 0; i < budgetappService.getTransactionOfMonth(month).size(); i++) {
+                    listToRemove.add(budgetappService.getTransactionOfMonth(month).get(i));
+                }
+                
+                listToRemove.stream().forEach(t -> budgetappService.removeTransaction(t));
+            });
+        verticalList.getChildren().add(removeAll);
+        
+        monthStatPane.add(verticalList, 0, 0);
         
         // A line graph of the months transactions
         
@@ -131,10 +173,10 @@ public class BudgetApp extends Application {
         yAxis.setLabel("Amount");
         
         LineChart<Number, Number> chart = new LineChart<>(xAxis, yAxis);
-        chart.setTitle("Transaction's of " + Month.of(month).getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+        chart.setTitle("Transactions of " + Month.of(month).getDisplayName(TextStyle.FULL, Locale.ENGLISH));
         
         XYChart.Series series = new XYChart.Series<>();
-        series.setName("Month total");
+        series.setName("Account balance");
         
         series.getData().add(new XYChart.Data(0, 0));
         
@@ -166,17 +208,18 @@ public class BudgetApp extends Application {
         
         // Welcome scene
         
-        BorderPane welcomePane = new BorderPane();
+        GridPane welcomePane = new GridPane();
+        welcomePane.setVgap(10);
+        welcomePane.setHgap(10);
+        welcomePane.setPadding(new Insets(10, 10, 10, 10));
+        
         VBox welcomeVBox = new VBox();
-        welcomeVBox.setPadding(new Insets(20));
+        welcomeVBox.setPadding(new Insets(10));
         welcomeVBox.setSpacing(10);
         
         Text title = new Text("BudgetApp");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 32));
-        welcomePane.setTop(title);
-        
-        Text empty = new Text("");
-        welcomeVBox.getChildren().add(empty);
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        welcomePane.add(title, 0, 0);
         
         Text welcomeText = new Text("Welcome to the BudgetApp! \n \n"
                 + "With the BudgetApp you can monitor your monthly "
@@ -190,7 +233,7 @@ public class BudgetApp extends Application {
         });
         welcomeVBox.getChildren().add(enterAppButton);
         
-        welcomePane.setCenter(welcomeVBox);
+        welcomePane.add(welcomeVBox, 0, 1);
         
         welcomeScene = new Scene(welcomePane, 1000, 600);
         
@@ -247,7 +290,7 @@ public class BudgetApp extends Application {
         
         statisticsPane.add(selectMonth, 0, 1);
         
-        statisticsScene = new Scene(statisticsPane, 1000, 600);
+        statisticsScene = new Scene(statisticsPane, 1000, 700);
         
         // Add new transaction
         
@@ -259,9 +302,9 @@ public class BudgetApp extends Application {
         bottomTitle.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         bottomVert.getChildren().add(bottomTitle);
         
-        Text bottomHelper = new Text("Remember to add a minus sign infront of the amount to add an expense. \n"
-                + "To add an recurring transaction enter the starting and ending months with a space in beetween.");
-        bottomVert.getChildren().add(bottomHelper);
+        Text bottomHelper1 = new Text("Remember to add a minus sign infront of the amount to add an expense.");
+        Text bottomHelper2 = new Text("To add the transaction to the current month, leave the month-field empty.\n To add an recurring transaction enter the starting and ending months with a space in beetween.");
+        bottomVert.getChildren().add(bottomHelper1);
         
         HBox transactionAdd = new HBox();
         transactionAdd.setSpacing(10);
@@ -274,10 +317,71 @@ public class BudgetApp extends Application {
         month.setPromptText("Enter the month");
         transactionAdd.getChildren().add(month);
         
+        Label labelPrompt = new Label();
+        
         Button submit = new Button("Submit");
         transactionAdd.getChildren().add(submit);
         
+        submit.setOnAction((ActionEvent e) -> {
+            labelPrompt.setText(null);
+            
+            if (amount.getText().trim().isEmpty() || amount.getText() == null || amount.getText().equals("")) {
+                labelPrompt.setText("You have not entered an amount.");
+            } else if (!budgetappService.isDouble(amount.getText())) {
+                labelPrompt.setText("Please enter a proper value. Remember to use a dot as a separator for decimals.");
+            } else if (amount.getText().trim().equals("0")) {
+                labelPrompt.setText("Amount can't be zero.");
+            } else {
+                double amountDouble = Double.parseDouble(amount.getText());
+                if (month.getText().equals("")) {
+                    budgetappService.addTransaction(amountDouble);
+                    amount.clear();
+                    labelPrompt.setText("Transaction added!");
+                }
+                String input = month.getText();
+                String[] bits = input.split(" ");
+                
+                if (bits.length == 1) {
+                    if (!budgetappService.isMonth(bits[0])) {
+                        labelPrompt.setText("The month value has to be beetween 1 and 12!");
+                    } else {
+                        budgetappService.addTransactionToMonth(amountDouble, Integer.parseInt(bits[0]));
+                        labelPrompt.setText("Transaction added!");
+                        amount.clear();
+                        month.clear();
+                    }
+                } else if (bits.length == 2) {
+                    if (!budgetappService.isMonth(bits[0]) || !budgetappService.isMonth(bits[1])) {
+                        labelPrompt.setText("The month value has to be beetween 1 and 12! Remember to add a space beetween the starting and ending months.");
+                    } else {
+                        int startingMonth = Integer.parseInt(bits[0]);
+                        int endingMonth = Integer.parseInt(bits[1]);
+                        
+                        if (startingMonth > endingMonth) {
+                            labelPrompt.setText("The starting month has to be earlier than the ending month.");
+                        } else {
+                            budgetappService.addRecurringTransaction(amountDouble, startingMonth, endingMonth);
+                            labelPrompt.setText("Transaction added!");
+                            amount.clear();
+                            month.clear();
+                        }
+                    }
+                }
+            }
+        });
+        
+        Button clear = new Button("Clear");
+        transactionAdd.getChildren().add(clear);
+        
+        clear.setOnAction((ActionEvent e) -> {
+            amount.clear();
+            month.clear();
+            labelPrompt.setText(null);
+        });
+        
         bottomVert.getChildren().add(transactionAdd);
+        bottomVert.getChildren().add(bottomHelper2);
+        bottomVert.getChildren().add(labelPrompt);
         
         statisticsPane.add(bottomVert, 0, 2, 2, 2);
         
