@@ -75,7 +75,7 @@ public class Transaction {
     }
     
     public String toString() {
-        return "Transaction amount: " + getAmount();
+        return "" + getAmount();
     }
     
     

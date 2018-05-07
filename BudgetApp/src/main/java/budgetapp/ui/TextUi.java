@@ -130,7 +130,7 @@ public class TextUi {
                     while (true) {
                         System.out.println("");
                         System.out.println("From which month to which do you want the transaction to occur? "
-                                + "Input the numerical values of strating and ending months with a space in beetween.");
+                                + "Input the numerical values of starting and ending months with a space in beetween.");
                         input = scanner.nextLine();
                         bits = input.split(" ");
                         if (bits.length != 2) {
