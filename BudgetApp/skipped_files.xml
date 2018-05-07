@@ -6,4 +6,5 @@
 
 <suppressions>
     <suppress files="budgetapp.ui.TextUi.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="budgetapp.ui.BudgetApp.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

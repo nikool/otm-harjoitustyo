@@ -35,20 +35,16 @@ public class Statistics {
         YearMonth yearMonthObject = YearMonth.of(localDate.getYear(), month);
         int daysInMonth = yearMonthObject.lengthOfMonth();
         
-        System.out.println("Test 2 " + daysInMonth);
-        
         double average = result / daysInMonth;
         average = round(average);
-        
-        System.out.println("Test 2 " + average);
         
         return average;
     }
     
     /**
      * The end total of a specific month
-     * @param listOfTransactions
-     * @return 
+     * @param listOfTransactions list containing the transactions of a month
+     * @return the double value for the end account balance
      */
     public double endTotal(List<Transaction> listOfTransactions) {
         list = listOfTransactions;
@@ -64,7 +60,7 @@ public class Statistics {
     /**
      * Rounds a double value to two decimals
      * @param value a non rounded double
-     * @return 
+     * @return a rounded double
      */
     private double round(double value) {
         double amount = value;

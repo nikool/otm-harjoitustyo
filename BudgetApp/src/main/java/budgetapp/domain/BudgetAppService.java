@@ -177,6 +177,11 @@ public class BudgetAppService {
         transactionDao.deleteAll();
     }
     
+    /**
+     * Returns a list of all the expense transactions of the month
+     * @param month the month of the transactions
+     * @return 
+     */
     public List<Transaction> getAllExpensesOfMonth(int month) {
         List<Transaction> expenses = new ArrayList<>();
         getTransactionOfMonth(month).stream().forEach(t -> {
@@ -188,6 +193,11 @@ public class BudgetAppService {
         return expenses;
     }
     
+    /**
+     * Returns a list of all the income transactions of the month
+     * @param month the month of the transactions
+     * @return 
+     */
     public List<Transaction> getAllIncomesOfMonth(int month) {
         List<Transaction> incomes = new ArrayList<>();
         getTransactionOfMonth(month).stream().forEach(t -> {

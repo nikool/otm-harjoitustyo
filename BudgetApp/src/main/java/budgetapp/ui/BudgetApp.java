@@ -17,23 +17,19 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -43,12 +39,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class BudgetApp extends Application {
-        private BudgetAppService budgetappService;
-        private Statistics statistics;
+    private BudgetAppService budgetappService;
+    private Statistics statistics;
 
-        private Scene welcomeScene;
-        private Scene statisticsScene;
-        private Scene transactionScene;
+    private Scene welcomeScene;
+    private Scene statisticsScene;
         
     public static void main(String[] args) throws Exception {
         launch(args);
@@ -119,7 +114,7 @@ public class BudgetApp extends Application {
             series3.setName("Daily averages");
             
             for (int i = 1; i < 13; i++) {
-                double expensesOfMonth = statistics.endTotal(budgetappService.getAllExpensesOfMonth(i)) * - 1;
+                double expensesOfMonth = statistics.endTotal(budgetappService.getAllExpensesOfMonth(i)) * -1;
                 double incomesOfMonth = statistics.endTotal(budgetappService.getAllIncomesOfMonth(i));
                 series1.getData().add(new XYChart.Data(i, expensesOfMonth));
                 series2.getData().add(new XYChart.Data(i, incomesOfMonth));
@@ -160,14 +155,14 @@ public class BudgetApp extends Application {
         
         Button removeAll = new Button("Remove all");
         removeAll.setOnAction((ActionEvent e) -> {
-                List<Transaction> listToRemove = new ArrayList<>();
+            List<Transaction> listToRemove = new ArrayList<>();
                 
-                for (int i = 0; i < budgetappService.getTransactionOfMonth(month).size(); i++) {
-                    listToRemove.add(budgetappService.getTransactionOfMonth(month).get(i));
-                }
+            for (int i = 0; i < budgetappService.getTransactionOfMonth(month).size(); i++) {
+                listToRemove.add(budgetappService.getTransactionOfMonth(month).get(i));
+            }
                 
-                listToRemove.stream().forEach(t -> budgetappService.removeTransaction(t));
-            });
+            listToRemove.stream().forEach(t -> budgetappService.removeTransaction(t));
+        });
         buttons.getChildren().add(removeAll);
         
         Button removeSelected = new Button("Remove selected");
@@ -293,8 +288,7 @@ public class BudgetApp extends Application {
         }
         
         group.selectedToggleProperty().addListener(
-            (ObservableValue<? extends Toggle> ov, Toggle old_toggle,
-            Toggle new_toggle) -> {
+            (ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) -> {
                 if (group.getSelectedToggle() != null) {
                     if (statisticsPane.getChildren().size() > 3) {
                         statisticsPane.getChildren().remove(3);
@@ -304,7 +298,7 @@ public class BudgetApp extends Application {
                     }
                     statisticsPane.add(monthStatistics((int) group.getSelectedToggle().getUserData()), 1, 1);
                 }
-        });
+            });
         
         statisticsPane.add(selectMonth, 0, 1);
         
