@@ -3,6 +3,7 @@ package budgetapp.domain;
 
 import budgetapp.dao.Dao;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -174,5 +175,27 @@ public class BudgetAppService {
      */
     public void removeAllTransactions() {
         transactionDao.deleteAll();
+    }
+    
+    public List<Transaction> getAllExpensesOfMonth(int month) {
+        List<Transaction> expenses = new ArrayList<>();
+        getTransactionOfMonth(month).stream().forEach(t -> {
+            if (t.getAmount() < 0) {
+                expenses.add(t);
+            }
+        });
+        
+        return expenses;
+    }
+    
+    public List<Transaction> getAllIncomesOfMonth(int month) {
+        List<Transaction> incomes = new ArrayList<>();
+        getTransactionOfMonth(month).stream().forEach(t -> {
+            if (t.getAmount() > 0) {
+                incomes.add(t);
+            }
+        });
+        
+        return incomes;
     }
 }
