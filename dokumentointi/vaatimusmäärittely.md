@@ -5,8 +5,8 @@
 Sovelluksen avulla käyttäjä voi tallentaa tietokantaan kuukausittaisia 
 tuloja ja menojaan. Sovellukseen voi myös tallentaa kuukausittain 
 toistuvia tuloja tai menoja. Sovellus tarjoaa käyttäjälle hyödyllistä 
-informaatiota omasta taloudestaan erilaisten tilastojen avulla. Näistä 
-esimerkkeinä kuukausittaiset keskiarvot kulutukselle ja tuloille.
+informaatiota omasta taloudestaan erilaisten tilastojen avulla. Sovellus myös piirtää hyödyllisiä
+grafiikoita helpottamaan käyttäjän tulojen ja menojen seuraamista.
 
 ## Käyttäjät
 
@@ -16,11 +16,8 @@ Sovelluksella on vain yksi käyttäjä, eli normaali käyttäjä.
 
 * Tulojen ja menojen syöttäminen
 
-* Syötettyjen tapahtumien tarkastelu-, muokkaus- ja 
-poistomahdollisuus.
+* Syötettyjen tapahtumien tarkastelu- ja poistomahdollisuus.
 
 * Kuukausittaisten tilastojen tarkastelu.
 
-* Tulojen ja menojen keskiarvot.
-
-* Onko talous plussalla vai miinuksella
+* Koko vuoden tilastojen tarkastelu
