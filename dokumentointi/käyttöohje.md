@@ -4,7 +4,7 @@ Lataa tiedosto BudgetApp-1.0-final.jar
 
 ## Konfigurointi
 
-Ohjelma olettaa sen hakmeistosta löytyvän tekstitiedoston config.properties, 
+Ohjelma olettaa sen käynnistyshakemistosta löytyvän tekstitiedoston config.properties, 
 joka määrittelee transaktioiden tallentamiseen käytetyn tiedoston. Tiedoston muoto on:
 
 `transactionFile=transactions.txt`
