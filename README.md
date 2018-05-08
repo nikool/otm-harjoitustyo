@@ -6,11 +6,11 @@ BudgetApp on sovellus, jolla käyttäjä voi seurata omia kuukausittaisia tuloja
 
 [Käyttöohje](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/k%C3%A4ytt%C3%B6ohje.md)
 
-[vaatimusmäärittely.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmäärittely.md)
+[Vaatimusmäärittely](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmäärittely.md)
 
-[työaikakirjanpito.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/työaikakirjanpito.md)
+[Työaikakirjanpito](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/työaikakirjanpito.md)
 
-[arkkitehtuurikuvaus.md](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/arkkitehtuurikuvaus.md)
+[Arkkitehtuurikuvaus](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/arkkitehtuurikuvaus.md)
 
 ## Releaset
 
@@ -37,3 +37,9 @@ Komento
 ````mvn package````
 
 generoi hakemistoon target suoritettavan jar-tiedoston BudgetApp-1.0-SNAPSHOT.jar
+
+## Checkstyle
+
+Tiedostoon checkstyle.xml määrittelemät tarkistukset suoritetaan komennolla
+
+`````mvn jxr:jxr checkstyle:checkstyle````
