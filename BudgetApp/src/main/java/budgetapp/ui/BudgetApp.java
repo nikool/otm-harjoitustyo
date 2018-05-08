@@ -38,6 +38,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Main class, creates the graphic user interface
+ * @author nikoo
+ */
 public class BudgetApp extends Application {
     private BudgetAppService budgetappService;
     private Statistics statistics;
@@ -55,7 +59,7 @@ public class BudgetApp extends Application {
      * @return returns a GridPane node containing the statistics and graphs
      */
     private Node monthStatistics(int month) {
-        List<Transaction> transactions = new ArrayList<>();
+        List<Transaction> transactions;
         transactions = budgetappService.getTransactionOfMonth(month);
         
         GridPane monthStatPane = new GridPane();
@@ -85,13 +89,26 @@ public class BudgetApp extends Application {
             
             // A button to remove all transactions
             
+            HBox yearButtonsHoriz = new HBox();
+            yearButtonsHoriz.setSpacing(10);
+            
             Button removeAll = new Button("Remove all");
             removeAll.setOnAction((ActionEvent e) -> {
                 budgetappService.removeAllTransactions();
             });
             
-            yearVerticalList.getChildren().add(removeAll);
+            yearButtonsHoriz.getChildren().add(removeAll);
             
+            // A button to create randomized data
+            
+            Button addRandom = new Button("Add randomized data");
+            addRandom.setOnAction((ActionEvent e) -> {
+                budgetappService.createRandomData();
+            });
+            
+            yearButtonsHoriz.getChildren().add(addRandom);
+            
+            yearVerticalList.getChildren().add(yearButtonsHoriz);
             yearStatPane.add(yearVerticalList, 0, 0);
             
             // A line graph of the account balance for the whole year
@@ -111,14 +128,14 @@ public class BudgetApp extends Application {
             series2.setName("Incomes");
             
             XYChart.Series series3 = new XYChart.Series<>();
-            series3.setName("Daily averages");
+            series3.setName("Daily averages (times 10)");
             
             for (int i = 1; i < 13; i++) {
                 double expensesOfMonth = statistics.endTotal(budgetappService.getAllExpensesOfMonth(i)) * -1;
                 double incomesOfMonth = statistics.endTotal(budgetappService.getAllIncomesOfMonth(i));
                 series1.getData().add(new XYChart.Data(i, expensesOfMonth));
                 series2.getData().add(new XYChart.Data(i, incomesOfMonth));
-                series3.getData().add(new XYChart.Data(i, statistics.dailyAverage(budgetappService.getTransactionOfMonth(i), i)));
+                series3.getData().add(new XYChart.Data(i, statistics.dailyAverage(budgetappService.getTransactionOfMonth(i), i) * 10));
             }
             
             chart.getData().add(series1);

@@ -4,6 +4,7 @@ package budgetapp.domain;
 import budgetapp.dao.Dao;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The class responsible for the logic
@@ -11,9 +12,11 @@ import java.util.List;
 
 public class BudgetAppService {
     private Dao transactionDao;
+    private Statistics statistics;
     
     public BudgetAppService(Dao dao) {
         this.transactionDao = dao;
+        this.statistics = new Statistics();
     }
     
     /**
@@ -175,5 +178,32 @@ public class BudgetAppService {
         });
         
         return incomes;
+    }
+    
+    /**
+     * Creates a randomized dataset for the app, useful for quick testing
+     */
+    public void createRandomData() {
+        double rent;
+        double expense;
+        double income;
+        
+        Random rnd = new Random();
+        
+        rent = (200 + rnd.nextDouble() * 1000) * -1;
+        
+        for (int i = 1; i < 13; i++) {
+            income = 400 + rnd.nextDouble() * 1000;
+            addTransactionToMonth(statistics.round(income), i);
+            addTransactionToMonth(statistics.round(rent), i);
+            for (int k = 1; k < 5; k++) {
+                expense = (20 + rnd.nextDouble() * 300) * -1;
+                addTransactionToMonth(statistics.round(expense), i);
+                if (rnd.nextDouble() < 0.33) {
+                    income = 20 + rnd.nextDouble() * 200;
+                    addTransactionToMonth(statistics.round(income), i);
+                }
+            }
+        }
     }
 }

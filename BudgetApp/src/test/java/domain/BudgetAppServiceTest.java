@@ -135,4 +135,13 @@ public class BudgetAppServiceTest {
     public void getAllIncomesOfMonthFindsIncomes() {
         assertEquals(1, budgetService.getAllIncomesOfMonth(1).size());
     }
+    
+    @Test
+    public void randomizerAddsDataToAllMonths() {
+        budgetService.removeAllTransactions();
+        budgetService.createRandomData();
+        for (int i = 1; i < 13; i++) {
+            assertEquals(false, budgetService.getTransactionOfMonth(i).isEmpty());
+        }
+    }
 }

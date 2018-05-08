@@ -52,7 +52,7 @@ public class Statistics {
             result += list.get(i).getAmount();
         }
         
-        return result;
+        return round(result);
     }
     
     /**
@@ -60,7 +60,7 @@ public class Statistics {
      * @param value a non rounded double
      * @return a rounded double
      */
-    private double round(double value) {
+    public double round(double value) {
         double amount = value;
         amount = amount * 100;
         amount = Math.round(amount);
