@@ -42,4 +42,4 @@ generoi hakemistoon target suoritettavan jar-tiedoston BudgetApp-1.0-SNAPSHOT.ja
 
 Tiedostoon checkstyle.xml määrittelemät tarkistukset suoritetaan komennolla
 
-`````mvn jxr:jxr checkstyle:checkstyle````
+````mvn jxr:jxr checkstyle:checkstyle````
