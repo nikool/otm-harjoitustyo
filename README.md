@@ -8,9 +8,11 @@ BudgetApp on sovellus, jolla käyttäjä voi seurata omia kuukausittaisia tuloja
 
 [Vaatimusmäärittely](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/vaatimusmäärittely.md)
 
-[Työaikakirjanpito](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/työaikakirjanpito.md)
-
 [Arkkitehtuurikuvaus](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/arkkitehtuurikuvaus.md)
+
+[Testausdokumentti](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/testausdokumentti.md)
+
+[Työaikakirjanpito](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/työaikakirjanpito.md)
 
 ## Releaset
 
