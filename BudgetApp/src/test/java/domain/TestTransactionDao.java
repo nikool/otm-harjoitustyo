@@ -2,7 +2,6 @@ package domain;
 
 import budgetapp.dao.Dao;
 import budgetapp.domain.Transaction;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +18,6 @@ public class TestTransactionDao implements Dao {
     }
 
     @Override
-    public void update(int id, double amount, int month) throws Exception {
-        for (Transaction t : transactions) {
-            if (t.getId() == id) {
-                t.setAmount(amount);
-                t.setMonth(Month.of(month));
-            }
-        }
-    }
-
-    @Override
     public void delete(int id) {
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getId() == id) {
@@ -38,7 +27,7 @@ public class TestTransactionDao implements Dao {
     }
 
     @Override
-    public Transaction create(Transaction transaction) throws Exception {
+    public Transaction create(Transaction transaction) {
         transaction.setId(transactions.size() + 1);
         transactions.add(transaction);
         return transaction;

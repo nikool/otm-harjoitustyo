@@ -4,9 +4,7 @@ package budgetapp.dao;
 import budgetapp.domain.Transaction;
 import java.io.File;
 import java.io.FileWriter;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +20,7 @@ public class TransactionDao implements Dao {
      * Constructs a new TransactionDao with a specified save file.
      * Checks if a file already exists, if not, creates a new one.
      * @param file a file where the apps data is stored
-     * @throws Exception 
+     * @throws Exception if the file is not found, creates a new one
      */
     public TransactionDao(String file) throws Exception {
         transactions = new ArrayList<>();
@@ -51,7 +49,7 @@ public class TransactionDao implements Dao {
     
     /**
      * Generates a new id for a transaction from the list size
-     * @return 
+     * @return a int value used for the id of the transaction
      */
     private int generateId() {
         return transactions.size() + 1;
@@ -71,23 +69,20 @@ public class TransactionDao implements Dao {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
+    
+    /**
+     * Creates a list of all the transactions
+     * @return a list of the transactions
+     */
     @Override
     public List<Transaction> findAll() {
         return transactions;
     }
-
-    @Override
-    public void update(int id, double amount, int month) throws Exception {
-        for (Transaction t : transactions) {
-            if (t.getId() == id) {
-                t.setAmount(amount);
-                t.setMonth(Month.of(month));
-            }
-        }
-        save();
-    }
-
+    
+    /**
+     * Deletes a transaction
+     * @param id the id value of the transaction to be deleted
+     */
     @Override
     public void delete(int id) {
         for (int i = 0; i < transactions.size(); i++) {
@@ -97,15 +92,25 @@ public class TransactionDao implements Dao {
         }
         save();
     }
-
+    
+    /**
+     * Saves a new transaction to the file with an id
+     * @param transaction a transaction with no id
+     * @return the new created transaction with an id
+     */
     @Override
-    public Transaction create(Transaction transaction) throws Exception {
+    public Transaction create(Transaction transaction) {
         transaction.setId(generateId());
         transactions.add(transaction);
         save();
         return transaction;
     }
-
+    
+    /**
+     * Finds all transactions of a single month
+     * @param month the month in question
+     * @return a list of the months transactions
+     */
     @Override
     public List<Transaction> findAllOfMonth(int month) {
         List<Transaction> transactionsOfMonth = new ArrayList<>();
@@ -117,7 +122,12 @@ public class TransactionDao implements Dao {
         return transactionsOfMonth;
     }
     
-    @Override
+    /**
+     * Finds one transaction based on its id
+     * @param id the id of the transaction to be searched
+     * @return the transaction if found, null if not
+     */
+    @Override 
     public Transaction findOne(int id) {
         for (Transaction t : transactions) {
             if (t.getId() == id) {
@@ -127,6 +137,9 @@ public class TransactionDao implements Dao {
         return null;
     }
     
+    /**
+     * Deletes all transactions
+     */
     @Override
     public void deleteAll() {
         transactions.removeAll(transactions);

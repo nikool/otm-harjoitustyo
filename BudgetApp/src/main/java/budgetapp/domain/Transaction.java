@@ -7,9 +7,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 /**
-     * A class that depicts a single transaction
-     * 
-     */
+ * A class that depicts a single transaction
+ */
 public class Transaction {
     
     private int id;
@@ -18,7 +17,7 @@ public class Transaction {
 
     /**
      * Add a transaction to the current month
-     * @param amount 
+     * @param amount the transaction amount
      */
     public Transaction(Double amount) {       
         this.amount = amount;
@@ -30,8 +29,8 @@ public class Transaction {
     
     /**
      * Add a transaction to a specific month
-     * @param amount
-     * @param month 
+     * @param amount the transaction amount
+     * @param month month to which to add the transaction
      */
     public Transaction(Double amount, int month) {    
         this.amount = amount;       
@@ -40,9 +39,9 @@ public class Transaction {
     
     /**
      * Add a transaction with an id to a specific month
-     * @param id
-     * @param amount
-     * @param month 
+     * @param id the transactions id
+     * @param amount transaction amount
+     * @param month month to which to add
      */
     public Transaction(int id, double amount, int month) {
         this.id = id;

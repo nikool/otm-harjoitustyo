@@ -4,15 +4,12 @@ package dao;
 import budgetapp.dao.Dao;
 import budgetapp.dao.TransactionDao;
 import budgetapp.domain.Transaction;
-import domain.TestTransactionDao;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.Month;
 import java.util.List;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -26,7 +23,7 @@ public class TransactionDaoTest {
     Dao dao;
     
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         transactionFile = testFolder.newFile("testfile_transactions.txt");
         
         try (FileWriter file = new FileWriter(transactionFile.getAbsolutePath())) {
@@ -49,6 +46,41 @@ public class TransactionDaoTest {
     @Test
     public void transactionsCanBeDeleted() {
         dao.delete(1);
+        assertEquals(0, dao.findAll().size());
+    }
+    
+    @Test
+    public void generateIdCreatesCorrectValue() {
+        dao.create(new Transaction(1.0, 1));
+        assertEquals(2, dao.findAll().get(dao.findAll().size()-1).getId());
+        dao.delete(2);
+    }
+    
+    @Test
+    public void createWorksCorrectly() {
+        assertEquals(2, dao.create(new Transaction(1.0, 1)).getId());
+        dao.delete(2);
+    }
+    
+    @Test
+    public void findAllOfMonthFindsAll() {
+        assertEquals(1, dao.findAllOfMonth(1).size());
+        assertEquals(10.0, dao.findAllOfMonth(1).get(0).getAmount(), 0);
+    }
+    
+    @Test
+    public void findOneFindsCorrect() {
+        assertEquals(10.0, dao.findOne(1).getAmount(), 0);
+    }
+    
+    @Test
+    public void findOneReturnsNullIfNotFound() {
+        assertEquals(null, dao.findOne(3));
+    }
+    
+    @Test
+    public void removeAllWorks() {
+        dao.deleteAll();
         assertEquals(0, dao.findAll().size());
     }
     

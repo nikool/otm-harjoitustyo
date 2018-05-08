@@ -2,7 +2,6 @@
 package budgetapp.domain;
 
 import budgetapp.dao.Dao;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +20,13 @@ public class BudgetAppService {
      * Adding a new transaction to the current month
      *
      * @param amount the transaction amount
-     * 
      * @return boolean if adding worked
      */
     public boolean addTransaction(double amount) {
         if (amount == 0) {
             return false;
         } else {
-            try {
-                transactionDao.create(new Transaction(amount));
-            } catch (Exception ex) {
-                return false;
-            }
+            transactionDao.create(new Transaction(amount));
             return true;
         }
     }
@@ -42,39 +36,30 @@ public class BudgetAppService {
      * 
      * @param amount the transaction amount
      * @param month the month user wants the transaction added to
-     * 
      * @return boolean on did it work
      */
     public boolean addTransactionToMonth(double amount, int month) {
         if (amount == 0) {
             return false;
         } else {
-            try {
-                transactionDao.create(new Transaction(amount, month));
-            } catch (Exception ex) {
-                return false;
-            }
+            transactionDao.create(new Transaction(amount, month));
             return true;
         }
     }
     
     /**
      * Add a recurring transactions to the specified timeframe
-     * @param amount
+     * @param amount the transaction amount
      * @param startingMonth from which month to start
      * @param endingMonth to which month to end
-     * @return 
+     * @return true if adding worked, false if not
      */
     public boolean addRecurringTransaction(double amount, int startingMonth, int endingMonth) {
         if (amount == 0) {
             return false;
         } else {
             for (int i = startingMonth; i <= endingMonth; i++) {
-                try {
-                    transactionDao.create(new Transaction(amount, i));
-                } catch (Exception ex) {
-                    return false;
-                }
+                transactionDao.create(new Transaction(amount, i));
             }
             return true;
         }    
@@ -82,8 +67,8 @@ public class BudgetAppService {
     
     /**
      * Check that the users input is a double value
-     * @param input
-     * @return 
+     * @param input the user typed input
+     * @return true if the input is a double value
      */
     public boolean isDouble(String input) {
         try {
@@ -95,22 +80,9 @@ public class BudgetAppService {
     }
     
     /**
-     * Print all the transactions of the parameter list
-     * @param list a list of transactions
-     * @return 
-     */
-    public String printAllTransactions(List<Transaction> list) {
-        StringBuilder sb = new StringBuilder();
-        
-        list.stream().forEach(t -> sb.append(t.getId()).append(" | ").append(t.getAmount()).append(", ").append(t.getMonth()).append("\n"));
-        
-        return sb.toString();
-    }
-    
-    /**
      * Check that the user input is a value for a month
-     * @param input
-     * @return 
+     * @param input the user input
+     * @return true if the input is an integer value and beetween 1 and 12
      */
     public boolean isMonth(String input) {
         
@@ -130,44 +102,40 @@ public class BudgetAppService {
     
     /**
      * Returns a list of transactions for a specific month
-     * @param month
-     * @return 
+     * @param month the month in question
+     * @return the list of transaction of the month
      */
     public List<Transaction> getTransactionOfMonth(int month) {
         return transactionDao.findAllOfMonth(month);
     }
     
+    /**
+     * Getter for all transactions
+     * @return a list of all transactions
+     */
     public List<Transaction> getTransactions() {
         return transactionDao.findAll();
     }
     
     /**
-     * Check that the users requested transaction exists
-     * @param id the id of the wanted transaction
-     * @return 
+     * Print all the transactions of the parameter list
+     * @param list a list of transactions
+     * @return a string format of the tranasactions
      */
-    public boolean transactionExists(int id) {
-        if (transactionDao.findOne(id) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    public Transaction getTransaction(int id) {
-        return transactionDao.findOne(id);
+    public String printAllTransactions(List<Transaction> list) {
+        StringBuilder sb = new StringBuilder();
+        
+        list.stream().forEach(t -> sb.append(t.getId()).append(" | ").append(t.getAmount()).append(", ").append(t.getMonth()).append("\n"));
+        
+        return sb.toString();
     }
     
     /**
      * Remove the specified transaction
-     * @param transaction 
+     * @param transaction the transaction to be removed
      */
     public void removeTransaction(Transaction transaction) {
-        try {
-            transactionDao.delete(transaction.getId());
-        } catch (Exception e) {
-            System.out.println("Removeal failed due to: " + e.getMessage());
-        }
+        transactionDao.delete(transaction.getId());
     }
     
     /**
@@ -180,7 +148,7 @@ public class BudgetAppService {
     /**
      * Returns a list of all the expense transactions of the month
      * @param month the month of the transactions
-     * @return 
+     * @return the list containing all negative transactions of the month
      */
     public List<Transaction> getAllExpensesOfMonth(int month) {
         List<Transaction> expenses = new ArrayList<>();
@@ -196,7 +164,7 @@ public class BudgetAppService {
     /**
      * Returns a list of all the income transactions of the month
      * @param month the month of the transactions
-     * @return 
+     * @return a list containing all the positive transactions of the month
      */
     public List<Transaction> getAllIncomesOfMonth(int month) {
         List<Transaction> incomes = new ArrayList<>();

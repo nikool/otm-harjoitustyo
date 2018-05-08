@@ -1,9 +1,7 @@
 
 package budgetapp.domain;
 
-import java.time.YearMonth;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.Date;
@@ -25,7 +23,7 @@ public class Statistics {
      * Returns the daily average consumption/income of a specific month
      * @param listOfTransactions months transactions
      * @param month month in question
-     * @return 
+     * @return the double value of the months daily average
      */
     public double dailyAverage(List<Transaction> listOfTransactions, int month) {
         list = listOfTransactions;   

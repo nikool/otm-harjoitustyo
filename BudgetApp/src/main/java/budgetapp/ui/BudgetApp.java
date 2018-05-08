@@ -203,7 +203,11 @@ public class BudgetApp extends Application {
         
         return monthStatPane;
     }
-
+    
+    /**
+     * Loads the configuration file and trys to load the database file
+     * @throws Exception if file is not found, creates a new one
+     */
     @Override
     public void init() throws Exception {
         Properties properties = new Properties();
@@ -216,6 +220,10 @@ public class BudgetApp extends Application {
         statistics = new Statistics();
     }
     
+    /**
+     * Draws the different stages
+     * @param primaryStage the main stage
+     */
     @Override
     public void start(Stage primaryStage) {
         
@@ -304,7 +312,7 @@ public class BudgetApp extends Application {
         
         statisticsScene = new Scene(statisticsPane, 1000, 700);
         
-        // Add new transaction
+        // The bottom part of the scene where the user can add a new transaction
         
         VBox bottomVert = new VBox();
         bottomVert.setPadding(new Insets(10));
