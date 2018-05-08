@@ -14,5 +14,8 @@
 | 2.5. | 2 | lisätty testejä |
 | 2.5. | 1 | aloitettu javadoc |
 | 7.5. | 8 | luotu graafinen käyttöliittymä sovellukselle |
+| 8.5. | 6 | jatkettu graafista käyttöliittymää |
+| 8.5. | 2 | viimeistelty testausta |
+| 8.5. | 2 | dokumentointia |
 | | | |
-| | 30 | yhteensä|
+| | 40 | yhteensä|
