@@ -73,6 +73,7 @@ public class Transaction {
         this.month = month;
     }
     
+    @Override
     public String toString() {
         return "" + getAmount();
     }

@@ -363,7 +363,6 @@ public class BudgetApp extends Application {
         
         submit.setOnAction((ActionEvent e) -> {
             labelPrompt.setText(null);
-            
             if (amount.getText().trim().isEmpty() || amount.getText() == null || amount.getText().equals("")) {
                 labelPrompt.setText("You have not entered an amount.");
             } else if (!budgetappService.isDouble(amount.getText())) {
