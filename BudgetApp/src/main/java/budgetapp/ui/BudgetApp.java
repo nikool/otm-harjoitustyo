@@ -184,7 +184,9 @@ public class BudgetApp extends Application {
         
         Button removeSelected = new Button("Remove selected");
         removeSelected.setOnAction((ActionEvent e) -> {
-            budgetappService.removeTransaction((Transaction) listOfTransactions.getSelectionModel().getSelectedItem());
+            if (!listOfTransactions.getSelectionModel().isEmpty()) {
+                budgetappService.removeTransaction((Transaction) listOfTransactions.getSelectionModel().getSelectedItem());
+            }
         });
         
         buttons.getChildren().add(removeSelected);
@@ -366,7 +368,7 @@ public class BudgetApp extends Application {
                 labelPrompt.setText("You have not entered an amount.");
             } else if (!budgetappService.isDouble(amount.getText())) {
                 labelPrompt.setText("Please enter a proper value. Remember to use a dot as a separator for decimals.");
-            } else if (amount.getText().trim().equals("0")) {
+            } else if (amount.getText().trim().equals("0") || amount.getText().trim().equals("-0")) {
                 labelPrompt.setText("Amount can't be zero.");
             } else {
                 double amountDouble = Double.parseDouble(amount.getText());
