@@ -38,7 +38,7 @@ Komento
 
 ````mvn package````
 
-generoi hakemistoon target suoritettavan jar-tiedoston BudgetApp-1.0-final.jar
+generoi hakemistoon target suoritettavan jar-tiedoston BudgetApp-final.jar
 
 ## Checkstyle
 
