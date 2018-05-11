@@ -17,5 +17,6 @@
 | 8.5. | 6 | jatkettu graafista käyttöliittymää |
 | 8.5. | 2 | viimeistelty testausta |
 | 8.5. | 2 | dokumentointia |
+| 11.5. | 4 | kommenttien, koodin ja dokumennoinnin siistimistä |
 | | | |
-| | 40 | yhteensä|
+| | 44 | yhteensä|
