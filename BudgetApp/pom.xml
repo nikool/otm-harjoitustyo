@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nikool</groupId>
     <artifactId>BudgetApp</artifactId>
-    <version>1.0-final</version>
+    <version>final</version>
     
     <packaging>jar</packaging>
     
