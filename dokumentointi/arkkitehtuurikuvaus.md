@@ -28,7 +28,7 @@ Toiminnasta vastaa BudgetAppService joka käsittelee tietoa TransactionDao-luoka
 
 Ohjelman pakkauskaavio:
 
-![pakkauskaavio](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/luokkakaavio.jpg)
+![pakkauskaavio](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/umlChart.png)
 
 ## Tietojen tallennus
 
