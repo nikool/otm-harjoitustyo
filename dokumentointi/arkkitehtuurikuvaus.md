@@ -4,7 +4,7 @@
 
 Ohjelman rakenne noudatta kolmikerrosarkkitehtuuria. Koodin pakkausrakenne on:
 
-![pakkausrakenne]()
+![pakkausrakenne](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/packageChart.PNG)
 
 Pakkaus `ui` sisältää JavaFX:llä toteutetun graafisen käyttöliittymän, `domain` sovelluslogiikan ja `dao` tiedon tallennukseen liittyvän koodin.
 
