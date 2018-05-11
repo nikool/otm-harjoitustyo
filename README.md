@@ -18,7 +18,7 @@ BudgetApp on sovellus, jolla käyttäjä voi seurata omia kuukausittaisia tuloja
 
 [Viikko 5](https://github.com/nikool/otm-harjoitustyo/releases/tag/week5)
 
-[Loppupalautus](https://github.com/nikool/otm-harjoitustyo/releases/tag/loppupalautus)
+[Loppupalautus](hhttps://github.com/nikool/otm-harjoitustyo/releases/tag/final)
 
 # Komentorivitoiminnot
 
