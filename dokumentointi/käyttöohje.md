@@ -5,7 +5,7 @@ Lataa tiedosto BudgetApp_final.zip. Pakattu kansio sisältää valmiin config.pr
 ## Konfigurointi
 
 Ohjelma olettaa sen käynnistyshakemistosta löytyvän tekstitiedoston config.properties, 
-joka määrittelee transaktioiden tallentamiseen käytetyn tiedoston. Tiedoston muoto on:
+joka määrittelee transaktioiden tallentamiseen käytetyn tiedoston. Tekstitiedoston muoto on:
 
 `transactionFile=transactions.txt`
 
