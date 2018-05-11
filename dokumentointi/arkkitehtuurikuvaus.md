@@ -50,7 +50,7 @@ jossa tiedot on jaettu merkillä `;`. Ensimmäinen osa on transaktioin id-numero
 
 Seuraavaksi kuvataan sovelluksen toiminta kun käyttäjä lisää uuden transaktion tietylle kuukaudelle:
 
-![sekvenssikaavio](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/sekvenssikaavio.png)
+![sekvenssikaavio](https://github.com/nikool/otm-harjoitustyo/blob/master/dokumentointi/sequenceChart.png)
 
 ## Ohjelmaan jääneet viat
 
