@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto BudgetApp_final.zip. Pakattu kansio sisältää valmiin config.properties-tiedoston ja ajettavan .jar-tiedoston.
+Lataa tiedosto BudgetApp-final.zip. Pakattu kansio sisältää valmiin config.properties-tiedoston ja ajettavan .jar-tiedoston.
 
 ## Konfigurointi
 
@@ -15,9 +15,9 @@ Tiedosto löytyy valmiiksi julkaisun pakatusta kansiosta, muuten se täytyy itse
 
 Ohjelma käynnistetään komentoriviltä komennolla
 
-`java -jar BudgetApp-1.0-final.jar`
+`java -jar BudgetApp-final.jar`
 
-Tai tuplaklikkaamalla pakatusta kansiosta purettua BudgetApp-1.0-final.jar-tiedostoa.
+Tai tuplaklikkaamalla pakatusta kansiosta purettua BudgetApp-final.jar-tiedostoa.
 
 ## Ohjelman avaus
 
