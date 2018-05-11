@@ -64,4 +64,4 @@ Sovelluksen olisi ollut hyvä tukea transaktioiden muokkaamista jälkikäteen, u
 
 ### DAO
 
-Sovellus olisi voinit käyttää tietokantaa tiedston sijasta tietojen tallentamiseen.
+Sovellus olisi voinut käyttää tietokantaa tiedston sijasta tietojen tallentamiseen.
