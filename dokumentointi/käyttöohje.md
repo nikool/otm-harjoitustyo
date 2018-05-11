@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto BudgetApp-1.0-final.jar
+Lataa tiedosto BudgetApp_final.zip. Pakattu kansio sisältää valmiin config.properties-tiedoston ja ajettavan .jar-tiedoston.
 
 ## Konfigurointi
 
@@ -9,11 +9,15 @@ joka määrittelee transaktioiden tallentamiseen käytetyn tiedoston. Tiedoston 
 
 `transactionFile=transactions.txt`
 
+Tiedosto löytyy valmiiksi julkaisun pakatusta kansiosta, muuten se täytyy itse lisätä.
+
 ## Ohjelman käynnistäminen
 
 Ohjelma käynnistetään komentoriviltä komennolla
 
 `java -jar BudgetApp-1.0-final.jar`
+
+Tai tuplaklikkaamalla pakatusta kansiosta purettua BudgetApp-1.0-final.jar-tiedostoa.
 
 ## Ohjelman avaus
 
